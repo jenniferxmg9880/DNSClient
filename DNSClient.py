@@ -15,11 +15,11 @@ def query_local_dns_server(domain,question_type):
         ip_address = str(answers[0])
         return ip_address 
     except Exception as e:
-        print(f"local DNS error for {domain}: {str(e)}")
+        print(f"Local DNS error for {domain}: {str(e)}")
         return f"Error: {str(e)}"
     
 # Define a function to query a public DNS server for the IP address of a given domain name
-def query_dns_server(domain,question_type):
+def query_dns_server(domain, question_type):
     try: 
         resolver = dns.resolver.Resolver()
         resolver.nameservers = [real_name_server]
@@ -33,8 +33,8 @@ def query_dns_server(domain,question_type):
 # Define a function to compare the results from the local and public DNS servers for each domain name in the list
 def compare_dns_servers(domainList,question_type):
     for domain_name in domainList:
-        local_ip_address = query_local_dns_server(domain_name,question_type)
-        public_ip_address = query_dns_server(domain_name,question_type)
+        local_ip_address = query_local_dns_server(domain_name, question_type)
+        public_ip_address = query_dns_server(domain_name, question_type)
         if local_ip_address != public_ip_address:
             return False
     return True    
@@ -43,16 +43,16 @@ def compare_dns_servers(domainList,question_type):
 def local_external_DNS_output(question_type):    
     print("Local DNS Server")
     for domain_name in domainList:
-        ip_address = query_local_dns_server(domain_name,question_type)
+        ip_address = query_local_dns_server(domain_name, question_type)
         print(f"The IP address of {domain_name} is {ip_address}")
 
     print("\nPublic DNS Server")
     for domain_name in domainList:
-        ip_address = query_dns_server(domain_name,question_type)
+        ip_address = query_dns_server(domain_name, question_type)
         print(f"The IP address of {domain_name} is {ip_address}") 
         
 def exfiltrate_info(domain,question_type): # testing method for part 2
-    data = query_local_dns_server(domain,question_type)
+    data = query_local_dns_server(domain, question_type)
     return data 
         
 if __name__ == '__main__':
@@ -64,11 +64,15 @@ if __name__ == '__main__':
     local_external_DNS_output(question_type)
     
     # Call the function to compare the results from both DNS servers and print the result
-    result = compare_dns_servers(domainList,question_type)
-    print(f"DNS Serrver match: {result}")
+    result = compare_dns_servers(domainList, question_type)
+    print(f"DNS servers match: {result}")
+    
     result = query_local_dns_server('nyu.edu.',question_type)    
     print(f"NYU IP address: {result}")
     
+    result = query_local_dns_server('example.com.',question_type)    
+    print(f"Example.com IP address: {result}")
+        
     #print(exfiltrate_info())
     exfiltrated_data = exfiltrate_info('google.com', question_type)
     print(f"Exfiltrated data: {exfiltrated_data}")
