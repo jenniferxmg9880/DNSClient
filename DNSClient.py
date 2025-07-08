@@ -27,7 +27,7 @@ def query_dns_server(domain, question_type):
         ip_address = str(answers[0])
         return ip_address
     except Exception as e:
-        print(f"Public DNS error for {domain}: {str(e)}")
+        print(f"Public DNS Error for {domain}: {str(e)}")
         return f"Error: {str(e)}"
     
 # Define a function to compare the results from the local and public DNS servers for each domain name in the list
