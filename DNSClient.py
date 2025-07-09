@@ -50,7 +50,7 @@ def local_external_DNS_output(question_type):
         print(f"The IP address of {domain_name} is {ip_address}")
         
         
-def exfiltrate_info(domain,???): # testing method for part 2
+def exfiltrate_info(domain,question_type): # testing method for part 2
     data = query_local_dns_server(domain,question_type)
     return data 
 
@@ -66,6 +66,7 @@ if __name__ == '__main__':
     
     # Call the function to compare the results from both DNS servers and print the result
     result = compare_dns_servers(domainList,question_type)
+    print("DNS servers match: {result}")
     result = query_local_dns_server('nyu.edu.',question_type)
     print(result)
     
